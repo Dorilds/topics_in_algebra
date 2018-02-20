@@ -26,7 +26,6 @@ def SVD(A):
 def main():
     A = np.random.rand(10, 10)*10
     pdb.set_trace()
-    print("Hello World!")
 
     # determinant, inverse, eigenvalues, basis of null space
 
