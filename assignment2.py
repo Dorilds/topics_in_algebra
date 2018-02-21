@@ -1,5 +1,6 @@
 import numpy as np
 from collections import defaultdict
+import sys
 import pdb # todo remove
 
 def create_random_5x5():
@@ -8,18 +9,23 @@ def create_random_5x5():
             
 def main():
     # create 100 random matrices
-    matrix_list = [create_random_5x5() for i in range(10000)]
+    n = int(input('How many random matrices would you like to create?\n'))
+    matrix_list = [create_random_5x5() for i in range(n)]
 
     # todo look at max and mins, check max/min of complex numbers
     for i, matrix in enumerate(matrix_list):
         info = get_info(matrix)
-        print(i)
         for e_val in info['algebraic_multiplicities']:
             geometric_multiplicity = len(info['associated_evecs'][e_val])
             if info['algebraic_multiplicities'][e_val] != geometric_multiplicity:
                 pdb.set_trace()
-    display_info(matrix_list[0])
-    pdb.set_trace()
+
+    while True:
+        more_info = input('\nThere are {} random matrices. Type a number in range [0,{}] '\
+                          "to display more info. Enter 'exit' to exit \n".format(n,n-1))
+        if more_info == 'exit':
+            sys.exit(0)            
+        display_info(matrix_list[int(more_info)])        
     
 def get_info(A):
     evals, evecs = np.linalg.eig(A)    
@@ -45,7 +51,7 @@ def display_info(A):
     ''' Print multiplicities, max/min evals
     '''
     info = get_info(A)
-    print('There are {} distinct evals'.format(info['algebraic_multiplicities']))
+    print('There are {} distinct evals'.format(len(info['algebraic_multiplicities'])))
     print('The largest eval is {}'.format(info['max']))
     print('The smallest eval is {}'.format(info['min']))
 
