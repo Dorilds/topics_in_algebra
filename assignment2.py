@@ -4,25 +4,32 @@ import sys
 import pdb # todo remove
 
 def create_random_5x5():
-    # return np.random.random_sample((5,5))
-    return np.random.randint(10, size=(5,5)) # todo what's a good range?
+    ''' Return 5x5 matrix with random numbers pulled from discrete uniform distribution
+    '''
+    return np.random.randint(10, size=(5,5)) 
             
 def main():
-    # create 100 random matrices
+
     n = int(input('How many random matrices would you like to create?\n'))
     matrix_list = [create_random_5x5() for i in range(n)]
 
-    # todo look at max and mins, check max/min of complex numbers
+    
     for i, matrix in enumerate(matrix_list):
         info = get_info(matrix)
         for e_val in info['algebraic_multiplicities']:
             geometric_multiplicity = len(info['associated_evecs'][e_val])
             if info['algebraic_multiplicities'][e_val] != geometric_multiplicity:
+                print('The {}th matrix is not diagonalizable! This is a first.'.format(i))
                 pdb.set_trace()
-
+                
+    print('\n****************************************************************************'\
+          '\nAll {} randomly created matrices are diagonalizable (algebraic multiplicity' \
+          ' is equal to the geometric multiplicity for all eigenvalues). \n' \
+          '****************************************************************************'.format(n))
+    
     while True:
         more_info = input('\nThere are {} random matrices. Type a number in range [0,{}] '\
-                          "to display more info. Enter 'exit' to exit \n".format(n,n-1))
+                          "to display more info about that matrix. Enter 'exit' to exit \n".format(n,n-1))
         if more_info == 'exit':
             sys.exit(0)            
         display_info(matrix_list[int(more_info)])        
@@ -51,7 +58,9 @@ def display_info(A):
     ''' Print multiplicities, max/min evals
     '''
     info = get_info(A)
-    print('There are {} distinct evals'.format(len(info['algebraic_multiplicities'])))
+    print('\nThe matrix is:\n')
+    print(A)
+    print('\nThere are {} distinct evals'.format(len(info['algebraic_multiplicities'])))
     print('The largest eval is {}'.format(info['max']))
     print('The smallest eval is {}'.format(info['min']))
 
@@ -59,7 +68,7 @@ def display_info(A):
         print('The algebraic multiplicitiy of eval {} is {}'.format(e_val, freq))
 
     for e_val, associated_evecs in info['associated_evecs'].items():
-        print('The geometric multiplicitiy of {} is {}'.format(e_val, len(associated_evecs)))
+        print('The geometric multiplicitiy of eval {} is {}'.format(e_val, len(associated_evecs)))
 
 if __name__ == '__main__':
     main()
