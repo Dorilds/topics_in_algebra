@@ -1,4 +1,5 @@
 import numpy as np
+from collections import defaultdict
 import pdb # todo remove
 
 def create_random_5x5():
@@ -7,34 +8,50 @@ def create_random_5x5():
             
 def main():
     # create 100 random matrices
-    matrix_list = [create_random_5x5() for i in range(100)]
-    display_info(matrix_list[0])
+    matrix_list = [create_random_5x5() for i in range(10000)]
+    # display_info(matrix_list[0]) TODO
 
     for i, matrix in enumerate(matrix_list):
         info = get_info(matrix)
         print(i)
-        if info['algebraic_multiplicity'] != info['geometric_multiplicity']:
-            pdb.set_trace()
+        for e_val in info['algebraic_multiplicities']:
+            geometric_multiplicity = len(info['associated_evecs'][e_val])
+            if info['algebraic_multiplicities'][e_val] != geometric_multiplicity:
+                pdb.set_trace()
 
 def get_info(A):
-    evals, evecs = np.linalg.eig(A)
-
+    evals, evecs = np.linalg.eig(A)    
+    
     info = {}
-    info['max'] = max(evals)
+    info['max'] = max(evals) # TODO does max/min work on complex? 
     info['min'] = min(evals)
-    info['algebraic_multiplicity'] = len(set([str(x) for x in evals]))
-    info['geometric_multiplicity'] = len(set([''.join(str(list(evecs[:,i]))) for i in range(evecs.shape[1])]))
+
+    # maps eval to frequency 
+    eval_count = defaultdict(int)
+    # maps eval to associated evecs
+    associated_evecs = defaultdict(list)
+    
+    for e_val in evals:
+        eval_count[e_val] += 1
+        associated_evecs[e_val].append(e_val)
+    info['algebraic_multiplicities'] = dict(eval_count)
+    info['associated_evecs'] = dict(associated_evecs)
+               
     return info
     
 def display_info(A):
     ''' Print multiplicities, max/min evals
     '''
     info = get_info(A)
-    print('There are {} distinct evals'.format(info['algebraic_multiplicity']))
+    print('There are {} distinct evals'.format(info['algebraic_multiplicities']))
     print('The largest eval is {}'.format(info['max']))
-    print('The largest eval is {}'.format(info['min']))
-    print('The algebraic multiplicitiy: {}'.format(info['algebraic_multiplicity']))
-    print('The geometric multiplicitiy: {}'.format(info['geometric_multiplicity']))
+    print('The smallest eval is {}'.format(info['min']))
+
+    for e_val, freq in info['algebraic_multiplicities']:        
+        print('The algebraic multiplicitiy of eval {} is {}'.format(e_val, freq))
+
+    for e_val, associated_evecs in info['associated_evecs']:
+        print('The geometric multiplicitiy of {} is {}'.format(e_val, len(associated_evecs)))
 
 if __name__ == '__main__':
     main()
