@@ -1,7 +1,8 @@
 import numpy as np
 from collections import defaultdict
 import sys
-import pdb # todo remove
+import pdb
+import matplotlib.pyplot as plt
 
 def create_random_5x5():
     ''' Return 5x5 matrix with random numbers pulled from discrete uniform distribution
@@ -12,20 +13,39 @@ def main():
 
     n = int(input('How many random matrices would you like to create?\n'))
     matrix_list = [create_random_5x5() for i in range(n)]
-
-    
+    max_eval_list = []
+    min_eval_list = []
     for i, matrix in enumerate(matrix_list):
         info = get_info(matrix)
+        max_eval_list.append(info['max'])
+        min_eval_list.append(info['min'])
         for e_val in info['algebraic_multiplicities']:
             geometric_multiplicity = len(info['associated_evecs'][e_val])
             if info['algebraic_multiplicities'][e_val] != geometric_multiplicity:
                 print('The {}th matrix is not diagonalizable! This is a first.'.format(i))
                 pdb.set_trace()
-                
+
+            if info['algebraic_multiplicities'][e_val] > 1 or  geometric_multiplicity > 1:
+                pdb.set_trace()
+
     print('\n****************************************************************************'\
           '\nAll {} randomly created matrices are diagonalizable (algebraic multiplicity' \
           ' is equal to the geometric multiplicity for all eigenvalues). \n' \
           '****************************************************************************'.format(n))
+
+    ''' Plot Graphs
+    plt.title("Distribution of maximum eigenvalues with {} matrices".format(n))
+    plt.xlabel('Eigenvalue')
+    plt.ylabel('Frequency')
+    plt.hist(max_eval_list, normed=False, bins=30)
+    plt.show()
+
+    plt.title("Distribution of minimum eigenvalues with {} matrices".format(n))
+    plt.xlabel('Eigenvalue')
+    plt.ylabel('Frequency')
+    plt.hist(min_eval_list, normed=False, bins=30)
+    plt.show()
+    '''
     
     while True:
         more_info = input('\nThere are {} random matrices. Type a number in range [0,{}] '\
@@ -38,7 +58,7 @@ def get_info(A):
     evals, evecs = np.linalg.eig(A)    
     
     info = {}
-    info['max'] = max(evals) # TODO does max/min work on complex? 
+    info['max'] = max(evals) # why discrete? 
     info['min'] = min(evals)
 
     # maps eval to frequency 
