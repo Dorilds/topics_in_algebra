@@ -9,8 +9,8 @@ def create_random_5x5():
 def main():
     # create 100 random matrices
     matrix_list = [create_random_5x5() for i in range(10000)]
-    # display_info(matrix_list[0]) TODO
 
+    # todo look at max and mins, check max/min of complex numbers
     for i, matrix in enumerate(matrix_list):
         info = get_info(matrix)
         print(i)
@@ -18,7 +18,9 @@ def main():
             geometric_multiplicity = len(info['associated_evecs'][e_val])
             if info['algebraic_multiplicities'][e_val] != geometric_multiplicity:
                 pdb.set_trace()
-
+    display_info(matrix_list[0])
+    pdb.set_trace()
+    
 def get_info(A):
     evals, evecs = np.linalg.eig(A)    
     
@@ -47,10 +49,10 @@ def display_info(A):
     print('The largest eval is {}'.format(info['max']))
     print('The smallest eval is {}'.format(info['min']))
 
-    for e_val, freq in info['algebraic_multiplicities']:        
+    for e_val, freq in info['algebraic_multiplicities'].items():        
         print('The algebraic multiplicitiy of eval {} is {}'.format(e_val, freq))
 
-    for e_val, associated_evecs in info['associated_evecs']:
+    for e_val, associated_evecs in info['associated_evecs'].items():
         print('The geometric multiplicitiy of {} is {}'.format(e_val, len(associated_evecs)))
 
 if __name__ == '__main__':
