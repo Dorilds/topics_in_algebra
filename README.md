@@ -42,3 +42,7 @@ It might be easier to just use a virtualenv on the cs machines. SSH into a compu
 # activates a virtualenv with the libraries installed
 source /usr/swat/bin/CS81env
 ```
+Once you have these libraries, you can run the program by doing:
+```
+python3 assignment2.py
+```
