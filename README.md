@@ -14,30 +14,13 @@ The info dictionary has 4 keys.
 
 * __Default Dictionary__: This is not a key in our info dictionary, but we used it to compute the previous two keys (algebraic_multiplicities and associated_evecs). A default dictionary is a like a regular python dictionary, but every key in the dictionary is initialized to some value that you specify. We use defaultdict(list) and defaultdict(int), which initialize every bucket in the dictionary with a list and (int) 0 respectively. This allows you to do things like someintdefaultdict[randomkey] += 1, or somelistdefaultdict[randomkey].append(25) without having to check if the key is defined and initialize something there if it isn't. Very useful.    
 
-
-
-MatPlotLib Code for Later Ref
-```
-plt.title("Distribution of maximum eigenvalues with {} matrices".format(n))
-plt.xlabel('Eigenvalue')
-plt.ylabel('Frequency')
-plt.hist(max_eval_list, normed=False, bins=30)
-plt.show()
-
-plt.title("Distribution of minimum eigenvalues with {} matrices".format(n))
-plt.xlabel('Eigenvalue')
-plt.ylabel('Frequency')
-plt.hist(min_eval_list, normed=False, bins=30)
-plt.show()
-```
-
 ### Requirements
 You'll need two libraries to run the python file, numpy and matplotlib.
 You can either install them locally:
 ```
 pip3 install numpy matplotlib
 ```
-It might be easier to just use a virtualenv on the cs machines. SSH into a computer, then:
+Or, it might be easier to just use a virtualenv on the cs machines. SSH into a computer, then:
 ```
 # activates a virtualenv with the libraries installed
 source /usr/swat/bin/CS81env

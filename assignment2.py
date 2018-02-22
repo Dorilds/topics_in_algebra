@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 def create_random_5x5():
     ''' Return 5x5 matrix with random numbers pulled from discrete uniform distribution
     '''
-    return np.random.randint(10, size=(5,5)) 
+    # return 10*np.random.random_sample((5,5)) # continuous distribution
+    return np.random.randint(10, size=(5,5))  # discrete distribution
             
 def main():
 
