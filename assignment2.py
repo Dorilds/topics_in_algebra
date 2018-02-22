@@ -16,8 +16,6 @@ def main():
 
     # create a list of n 5x5 random matrices
     matrix_list = [create_random_5x5() for i in range(n)]
-    max_eval_list = [] # List of max e_vals. Used later to graph distribution.
-    min_eval_list = [] # List of min e_vals. Used later to graph distribution.
 
     # For every matrix in our matrix list
     for i, matrix in enumerate(matrix_list):
