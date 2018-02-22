@@ -31,3 +31,14 @@ plt.hist(min_eval_list, normed=False, bins=30)
 plt.show()
 ```
 
+### Requirements
+You'll need two libraries to run the python file, numpy and matplotlib.
+You can either install them locally:
+```
+pip3 install numpy matplotlib
+```
+It might be easier to just use a virtualenv on the cs machines. SSH into a computer, then:
+```
+# activates a virtualenv with the libraries installed
+source /usr/swat/bin/CS81env
+```
