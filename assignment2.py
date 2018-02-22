@@ -14,7 +14,7 @@ def main():
 
     n = int(input('How many random matrices would you like to create?\n'))
 
-    # create a list of matrix 5x5 random matrices
+    # create a list of n 5x5 random matrices
     matrix_list = [create_random_5x5() for i in range(n)]
     max_eval_list = [] # List of max e_vals. Used later to graph distribution.
     min_eval_list = [] # List of min e_vals. Used later to graph distribution.
