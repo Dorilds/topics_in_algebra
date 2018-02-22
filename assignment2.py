@@ -12,10 +12,18 @@ def create_random_5x5():
 def main():
 
     n = int(input('How many random matrices would you like to create?\n'))
+
+    # create a list of matrix 5x5 random matrices
     matrix_list = [create_random_5x5() for i in range(n)]
-    max_eval_list = []
-    min_eval_list = []
+    max_eval_list = [] # List of max e_vals. Used later to graph distribution.
+    min_eval_list = [] # List of min e_vals. Used later to graph distribution.
+
+    # For every matrix in our matrix list
     for i, matrix in enumerate(matrix_list):
+        # Call get_info(), which returns a python dictionary called info.
+        # It has the keys max, min, algebraic_multiplicities, associated_evecs
+        # Read more about each of the keys in the readme
+        # GoTo: https://github.com/WilliamCarlos/topics_in_algebra
         info = get_info(matrix)
         max_eval_list.append(info['max'])
         min_eval_list.append(info['min'])
@@ -61,15 +69,15 @@ def get_info(A):
     info['max'] = max(evals) # why discrete? 
     info['min'] = min(evals)
 
-    # maps eval to frequency 
-    eval_count = defaultdict(int)
+    # maps eval to frequency
+    algebraic_multiplicities = defaultdict(int)
     # maps eval to associated evecs
     associated_evecs = defaultdict(list)
     
     for e_val in evals:
-        eval_count[e_val] += 1
+        algebraic_multiplicities[e_val] += 1
         associated_evecs[e_val].append(e_val)
-    info['algebraic_multiplicities'] = dict(eval_count)
+    info['algebraic_multiplicities'] = dict(algebraic_multiplicities)
     info['associated_evecs'] = dict(associated_evecs)
                
     return info
