@@ -19,9 +19,9 @@ def write_evals(e_vals, write_path, i):
 
 def write_eval_dict(d):
     f = open('q4/2nd_max_evals.txt', 'w')
-    f.write('N and 2nd highest eval')
+    f.write('N and 2nd highest eval\n')
     for key, val in d.items():
-        f.write('N:{} {}'.format(key, val))
+        f.write('N:{} {}\n'.format(key, np.around(val, 3)))
         
 def plot_2nd_evals(d):
     plt.title('2nd Highest Eval vs N')
