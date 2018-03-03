@@ -12,12 +12,15 @@ class Lake:
     def __init__(self, num_pads, num_frogs, num_iterations, name):
         self.pads_dict = self.initialize_pads_dict(num_pads, num_frogs)
         self.transition_matrix = self.initialize_transition_matrix(num_pads)
-
+        self.write_path = name
         # TODO: make distribution a dictionary (pretty print)
         # TODO: keep track of distribution and print. keep track of time. graph results.
         # TODO: table after each of the first 10 turns with N=5 (10 turns), N=10 (20 turns). 100 frogs
         # TODO: measurement of equilibrium. TRACE frog path? net flow across nodes.
         # TODO: keep gif and link
+        # TODO: create utils file
+        # TODO: clean up constructor
+        # TODO: change name to self.write_path
 
         # Print initial stage
         print('Initial Stage:')
@@ -35,8 +38,25 @@ class Lake:
             distribution = self.dict_dist(self.pads_dict)
             self.pretty_print_dict(distribution)
             self.save_histogram_image(distribution, i, num_frogs, name)
-            print('\n')                
+            print('\n')
 
+        e_vals = sorted(self.get_evals(self.transition_matrix), reverse=True)
+        print('\nEigenvalues!')    
+        [print(e_val) for e_val in e_vals]
+        print('\n')
+
+        self.write_evals(e_vals)
+    
+    def write_evals(self, e_vals):
+        f = open('{}/evals.txt'.format(self.write_path), 'w')
+        for e_val in e_vals:
+            f.write(str(e_val) + '\n')
+        f.close()
+        
+    def get_evals(self, A):
+        e_vals, _ = np.linalg.eig(A)
+        return e_vals
+    
     def save_histogram_image(self, d, num_jumps, num_frogs, name):
         # make histogram
         # save to name/{name}
