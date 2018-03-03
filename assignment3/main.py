@@ -49,6 +49,7 @@ class Lake:
     
     def write_evals(self, e_vals):
         f = open('{}/evals.txt'.format(self.write_path), 'w')
+        f.write('Sorted evals for A\n')
         for e_val in e_vals:
             f.write(str(e_val) + '\n')
         f.close()
