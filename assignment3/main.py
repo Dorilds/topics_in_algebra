@@ -17,13 +17,13 @@ class Lake:
         # TODO: keep track of distribution and print. keep track of time. graph results.
         # TODO: table after each of the first 10 turns with N=5 (10 turns), N=10 (20 turns). 100 frogs
         # TODO: measurement of equilibrium. TRACE frog path? net flow across nodes.
-        # TODO: graph histograms
+        # TODO: keep gif and link
 
         # Print initial stage
         print('Initial Stage:')
         distribution = self.dict_dist(self.pads_dict)
         self.pretty_print_dict(distribution)
-        self.save_histogram_image(distribution, 0, name)
+        self.save_histogram_image(distribution, 0, num_frogs, name)
         print('\n')
 
         if not os.path.exists(name):
@@ -34,18 +34,23 @@ class Lake:
             self.increment_time()
             distribution = self.dict_dist(self.pads_dict)
             self.pretty_print_dict(distribution)
-            self.save_histogram_image(distribution, i, name)
+            self.save_histogram_image(distribution, i, num_frogs, name)
             print('\n')                
 
-    def save_histogram_image(self, d, num_jumps, name):
+    def save_histogram_image(self, d, num_jumps, num_frogs, name):
         # make histogram
         # save to name/{name}
 
         plt.title("Frog Distribution After {} jumps".format(num_jumps))
         plt.xlabel('Lilypads')
         plt.ylabel('Number of Frogs')
-        plt.bar(d.keys(), d.values(), color='b')
-        plt.savefig('{}/{}.png'.format(name, num_jumps), bbox_inches='tight')    
+        plt.ylim((0, num_frogs))
+        # plt.bar(d.keys(), d.values(), color='b')
+
+        plt.bar(range(len(d)), d.values(), align='center')
+        plt.xticks(range(len(d)), d.keys())
+        plt.savefig('{}/{}.png'.format(name, num_jumps), bbox_inches='tight')
+        plt.gcf().clear()
         
     def pretty_print_dict(self, d):
         for key, value in sorted(d.items(), key=lambda x: int(x[0][3:])):
@@ -65,7 +70,10 @@ class Lake:
             for frog in frogs_list:
                 next_pad = self.get_next_pad(pad)
                 updated_pads[next_pad].append(frog)
-        self.pads_dict = updated_pads
+
+        # Update pads dictionary
+        for key, value in self.pads_dict.items():            
+            self.pads_dict[key] = updated_pads[key][:]
         
     def initialize_transition_matrix(self, num_pads):
         ''' Initialize nxn transition matrix '''
