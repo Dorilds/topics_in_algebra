@@ -7,16 +7,28 @@ class Frog:
         self.frog_number = frog_number
         
 class Lake:
-    def __init__(self, num_pads, num_frogs):
+    def __init__(self, num_pads, num_frogs, num_iterations):
         self.pads_dict = self.initialize_pads_dict(num_pads, num_frogs)
         self.transition_matrix = self.initialize_transition_matrix(num_pads)
 
         # TODO: make distribution a dictionary (pretty print)
         # TODO: keep track of distribution and print. keep track of time. graph results.
         # TODO: table after each of the first 10 turns with N=5 (10 turns), N=10 (20 turns). 100 frogs
-        # TODO: measurement of equilibrium. TRACE frog path? net flow across nodes. 
+        # TODO: measurement of equilibrium. TRACE frog path? net flow across nodes.
+        # TODO: graph histograms
+
+        # Print initial stage
+        print('Initial Stage:')
         distribution = self.dict_dist(self.pads_dict)
-        pdb.set_trace()
+        self.pretty_print_dict(distribution)
+        print('\n')
+
+        for i in range(num_iterations):
+            print('After {} jumps:'.format(i+1))
+            self.increment_time()
+            distribution = self.dict_dist(self.pads_dict)
+            self.pretty_print_dict(distribution)
+            print('\n')                
 
     def pretty_print_dict(self, d):
         for key, value in sorted(d.items(), key=lambda x: int(x[0][3:])):
@@ -36,8 +48,6 @@ class Lake:
             for frog in frogs_list:
                 next_pad = self.get_next_pad(pad)
                 updated_pads[next_pad].append(frog)
-
-        pdb.set_trace()
         self.pads_dict = updated_pads
         
     def initialize_transition_matrix(self, num_pads):
@@ -88,7 +98,10 @@ def main():
     num_pads = 12
     num_frogs = 100
 
-    lake = Lake(num_pads, num_frogs)
+    q2 = (5, 100, 10) # 5 pads, 100 frogs, 10 iterations
+    q3 = (10, 100, 20) # 10 pads, 100 frogs, 20 iterations
+    lake_q2 = Lake(*q2)
+    lake_q3 = Lake(*q3)
     
 if __name__ == "__main__":
     main()
