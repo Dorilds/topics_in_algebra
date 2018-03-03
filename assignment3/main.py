@@ -10,12 +10,23 @@ class Lake:
     def __init__(self, num_pads, num_frogs):
         self.pads_dict = self.initialize_pads_dict(num_pads, num_frogs)
         self.transition_matrix = self.initialize_transition_matrix(num_pads)
-
-        from collections import defaultdict
-        d = defaultdict(int)
         
         pdb.set_trace()
 
+    def dict_dist(self, d):
+        return [(key, len(d[key])) for key in self.pads_dict]
+        
+    def increment_time(self):
+        ''' Make all the frogs jump '''
+        updated_pads = self.initialize_pads_dict(len(self.pads_dict), 0)
+        for pad, frogs_list in self.pads_dict.items():
+            for frog in frogs_list:
+                next_pad = self.get_next_pad(pad)
+                updated_pads[next_pad].append(frog)
+
+        pdb.set_trace()
+        self.pads_dict = updated_pads
+        
     def initialize_transition_matrix(self, num_pads):
         ''' Initialize nxn transition matrix '''
         transition_matrix = np.zeros((num_pads, num_pads))
@@ -35,20 +46,27 @@ class Lake:
             pads['pad0'].append(Frog(i))
         return pads
 
-    def get_next_pad(self, current_pad):
-        ''' Given the index of the current pad, uses transition matrix to return next pad'''
-        row = self.transition_matrix[current_pad]
+    def get_next_pad(self, pad_name):
+        ''' Given the name of the current pad (i.e. 'pad3'), uses transition matrix to return 
+        next pad name (i.e. 'pad2' or 'pad3' or 'pad4')'''
+        pad_num = int(pad_name[3:]) # convert padnam (i.e. 'pad123') to number (i.e 123)
+        
+        row = self.transition_matrix[pad_num]
         probability_total = np.zeros_like(row)
+
+        # ith entry in probability_total holds sum(row[0,i]) (including i)
         for i in range(len(probability_total)):
             if i == 0:
                 probability_total[i] = row[i]
                 continue
             else:
                 probability_total[i] = row[i] + probability_total[i-1]
+
+        # Return jth index with prob(transition_matrix[j])
         rand_prob = random.random()
         for i in range(len(probability_total)):
             if rand_prob < probability_total[i]:
-                return i            
+                return 'pad{}'.format(i)
         pdb.set_trace()
         raise Exception('disaster')
     
