@@ -1,0 +1,29 @@
+\hspace*{10mm}
+
+An abstract vector space is a set of vectors that is closed under addition, closed under scalar multiplication, and meet eights other axioms: communtativity of addition, associativity of addition, the additive identity, additive inverses, the first and second distributive laws, the multiplicative identity, and relation to ordinary multiplication.
+
+The coordinates of a vector in an abstract vector space can be written as a linear combination of scalars {$c_1$, $c_2$,...,$c_m$} with c $\in$ $\mathbb{R}^n$ and a set of basis vectors {$b_1$, $b_2$,...,$b_m$} with $b_i$ $\in$ $\mathbb{R}^n$. The set of basis vectors {$b_1$, $b_2$,...,$b_m$}, which we call $\textbf{b}$ must be linearly independent and span the vector space. A vector written in a given basis can be (uniquely) represented by the coefficients of the linear combination, {$c_1$, $c_2$,...,$c_n$}.
+
+Formally, this corresponds to the formula: $$\textbf{v} = c_1 \textbf{b}_1 + c_2 \textbf{b}_2+...+c_n \textbf{b}_n$$ where $\textbf{b}_i$ is a basis vector and the coefficient $c_i$ is the corresponding coordinate for that basis vector.
+
+
+The matrix of a linear transformation compiles basis vectors into the columns of a matrix; this matrix can be used to transform a vector from one basis to another. In other words, multiplying a vector by the matrix of a linear transformation maps an input vector into an output vector. An example of this would be a $L(\textbf{v}) = A\textbf{v}$, where L is the linear operator and A is the matrix of the linear transformation. Suppose now that we have two different bases for the same vector space V. A change of basis matrix allows us to take a vector with one basis and change it to the other basis. Given some vector $\textbf{v}$ in V, with a basis of $\mathcal{U} = {\textbf{u}_1, \textbf{u}_2,...,\textbf{u}_n}$, that we want to change  to the basis $ \mathcal{W} = {\textbf{w}_1, \textbf{w}_2,...,\textbf{w}_m}$ we can find a change of basis matrix that allows us easily to convert between basis $\mathcal{U}$ and $\mathcal{W}$. By applying the coordinate coefficients of the basis for U, $[\textbf{v}]_\mathcal{U}$, to basis W we get a matrix:
+$$
+\begin{pmatrix}
+[\textbf{u}_1]_W & [\textbf{u}_2]_W & ... & [\textbf{u}_n]_W 
+\end{pmatrix}
+$$
+
+This gives us the transformation such that $[\textbf{v}]_W = A_{WU} [\textbf{v}]_U$ where A is the matrix above and known as the change of basis matrix. More generally though we would write $A_{U\rightarrow W}$ as the change of basis formulas as: 
+$$A = P_{\mathcal{WU}}DP_{\mathcal{UW}}^{-1}$$
+where P is the matrix of basis W, typically eigenvectors, D is the matrix of eigenvalues, and $P^{-1}$ is the inverse of the matrix of basis $\mathcal{W}$. This allows us to change a vector's basis. 
+
+
+
+
+Abstract vector spaces can consist of an infinite number of dimensions and are often used to theorize a concept that can happen in $\mathbb{R}^n$ to an abstract vector space V. The two main differences between an abstract vector space V and a real vector space $\mathbb{R}^n$ are that the dimension of the vector space $\mathbb{R}^n$ is n while the dimension of V is infinite. The second main difference is that V does not have a basis so you can't take its coordinates. However, that does not mean that the coordinates of V cannot be known; it just means that they must be related to a different basis in order to find their coordinates in V.
+
+(these will form a basis of V). This means that the basis spans all of the vector space such that we can find the coordinates to any vffector,
+
+
+
