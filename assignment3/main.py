@@ -37,7 +37,7 @@ class Lake:
             self.increment_time()
             distribution = self.dict_dist(self.pads_dict)
             self.pretty_print_dict(distribution)
-            self.save_histogram_image(distribution, i, num_frogs, name)
+            self.save_histogram_image(distribution, i+1, num_frogs, name)
             print('\n')
 
         e_vals = sorted(self.get_evals(self.transition_matrix), reverse=True)
