@@ -1,13 +1,15 @@
 import numpy as np
 import random
 import pdb # todo remove
+import matplotlib.pyplot as plt
+import os
 
 class Frog:
     def __init__(self, frog_number):
         self.frog_number = frog_number
         
 class Lake:
-    def __init__(self, num_pads, num_frogs, num_iterations):
+    def __init__(self, num_pads, num_frogs, num_iterations, name):
         self.pads_dict = self.initialize_pads_dict(num_pads, num_frogs)
         self.transition_matrix = self.initialize_transition_matrix(num_pads)
 
@@ -21,15 +23,30 @@ class Lake:
         print('Initial Stage:')
         distribution = self.dict_dist(self.pads_dict)
         self.pretty_print_dict(distribution)
+        self.save_histogram_image(distribution, 0, name)
         print('\n')
 
+        if not os.path.exists(name):
+            os.makedirs(name)
+            
         for i in range(num_iterations):
             print('After {} jumps:'.format(i+1))
             self.increment_time()
             distribution = self.dict_dist(self.pads_dict)
             self.pretty_print_dict(distribution)
+            self.save_histogram_image(distribution, i, name)
             print('\n')                
 
+    def save_histogram_image(self, d, num_jumps, name):
+        # make histogram
+        # save to name/{name}
+
+        plt.title("Frog Distribution After {} jumps".format(num_jumps))
+        plt.xlabel('Lilypads')
+        plt.ylabel('Number of Frogs')
+        plt.bar(d.keys(), d.values(), color='b')
+        plt.savefig('{}/{}.png'.format(name, num_jumps), bbox_inches='tight')    
+        
     def pretty_print_dict(self, d):
         for key, value in sorted(d.items(), key=lambda x: int(x[0][3:])):
             print("{} : {}".format(key, value))
@@ -98,8 +115,8 @@ def main():
     num_pads = 12
     num_frogs = 100
 
-    q2 = (5, 100, 10) # 5 pads, 100 frogs, 10 iterations
-    q3 = (10, 100, 20) # 10 pads, 100 frogs, 20 iterations
+    q2 = (5, 100, 10, 'q2') # 5 pads, 100 frogs, 10 iterations
+    q3 = (10, 100, 20, 'q3') # 10 pads, 100 frogs, 20 iterations
     lake_q2 = Lake(*q2)
     lake_q3 = Lake(*q3)
     
