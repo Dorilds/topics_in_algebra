@@ -10,11 +10,24 @@ class Lake:
     def __init__(self, num_pads, num_frogs):
         self.pads_dict = self.initialize_pads_dict(num_pads, num_frogs)
         self.transition_matrix = self.initialize_transition_matrix(num_pads)
-        
+
+        # TODO: make distribution a dictionary (pretty print)
+        # TODO: keep track of distribution and print. keep track of time. graph results.
+        # TODO: table after each of the first 10 turns with N=5 (10 turns), N=10 (20 turns). 100 frogs
+        # TODO: measurement of equilibrium. TRACE frog path? net flow across nodes. 
+        distribution = self.dict_dist(self.pads_dict)
         pdb.set_trace()
 
+    def pretty_print_dict(self, d):
+        for key, value in sorted(d.items(), key=lambda x: int(x[0][3:])):
+            print("{} : {}".format(key, value))
+            
     def dict_dist(self, d):
-        return [(key, len(d[key])) for key in self.pads_dict]
+        tuple_list = [(key, len(d[key])) for key in self.pads_dict]
+        d = {}
+        for pad, num_frogs in tuple_list:
+            d[pad] = num_frogs
+        return d
         
     def increment_time(self):
         ''' Make all the frogs jump '''
