@@ -28,3 +28,5 @@ The info dictionary has 4 keys.
 
 * __Default Dictionary__: This is not a key in our info dictionary, but we used it to compute the previous two keys (algebraic_multiplicities and associated_evecs). A default dictionary is a data structure very similar to a regular python dictionary, but every key in the dictionary is initialized to some value that you specify. We use defaultdict(list) and defaultdict(int), which initialize every bucket in the dictionary with an empty list and integer (0) respectively. This allows you to do things like someintdefaultdict[randomkey] += 1, or somelistdefaultdict[randomkey].append(25) without having to check if the key is defined and initialize something there if it isn't. Very useful.    
 
+### Assignment 3
+Not really readable at all right now. Will fix. 
