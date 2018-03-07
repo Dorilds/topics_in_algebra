@@ -13,14 +13,6 @@ class Lake:
         self.pads_dict = self.initialize_pads_dict(num_pads, num_frogs)
         self.transition_matrix = self.initialize_transition_matrix(num_pads)
         self.write_path = name
-        # TODO: make distribution a dictionary (pretty print)
-        # TODO: keep track of distribution and print. keep track of time. graph results.
-        # TODO: table after each of the first 10 turns with N=5 (10 turns), N=10 (20 turns). 100 frogs
-        # TODO: measurement of equilibrium. TRACE frog path? net flow across nodes.
-        # TODO: keep gif and link
-        # TODO: create utils file
-        # TODO: clean up constructor
-        # TODO: change name to self.write_path
 
         # Print initial stage
         print('Initial Stage:')
