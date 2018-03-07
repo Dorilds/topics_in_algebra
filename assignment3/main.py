@@ -33,6 +33,7 @@ class Lake:
 
         print('NET FLOW')
         print(net_flow)
+        self.write_flow(net_flow)
         
         e_vals = sorted(self.get_evals(self.transition_matrix), reverse=True)
         print('\nEigenvalues!')    
@@ -58,6 +59,18 @@ class Lake:
         self.pretty_print_dict(distribution)
         self.save_histogram_image(distribution, 0, num_frogs, name)
         print('\n')
+
+
+    def write_flow(self, flow_list):
+        f = open('{}/flow.txt'.format(self.write_path), 'w')
+        f.write('Avg Change in # frogs/lilypad over 10 iterations\n')
+        for idx, flow in enumerate(flow_list): 
+            f.write('avg change {}->{}: {}\n'.format(idx, idx+1, flow))
+
+        f.write('\nIn plaintext: \n')
+        for flow in flow_list: 
+            f.write('{}\n'.format(flow))
+        f.close()
         
     def write_evals(self, e_vals):
         f = open('{}/evals.txt'.format(self.write_path), 'w')

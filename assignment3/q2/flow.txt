@@ -1,0 +1,22 @@
+Avg Change in # frogs/lilypad over 10 iterations
+avg change 0->1: 29.6
+avg change 1->2: 12.8
+avg change 2->3: 4.4
+avg change 3->4: 2.4
+avg change 4->5: 3.6
+avg change 5->6: 1.6
+avg change 6->7: 4.8
+avg change 7->8: 4.0
+avg change 8->9: 0.4
+avg change 9->10: 2.8
+In plaintext: 
+29.6
+12.8
+4.4
+2.4
+3.6
+1.6
+4.8
+4.0
+0.4
+2.8
