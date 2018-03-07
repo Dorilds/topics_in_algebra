@@ -1,4 +1,5 @@
 # todo make this readable
+# todo print tables instead of histograms
 
 ### TODO
 Print latex tables
