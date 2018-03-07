@@ -18,6 +18,9 @@ class Lake:
 
         if not os.path.exists(name):
             os.makedirs(name)
+            
+        if os.path.exists(name + '/latex_tables.txt'):
+            os.remove(name + '/latex_tables.txt')
 
         net_flow = []
         current_distribution = self.dict_dist(self.pads_dict)
@@ -29,7 +32,7 @@ class Lake:
             net_flow.append(self.get_net_flow(current_distribution, prev_distribution))
             self.pretty_print_dict(current_distribution)
             self.save_histogram_image(current_distribution, i+1, num_frogs, name)
-            self.save_distribution_table(current_distribution, i+1, num_frogs, name)
+            self.save_distribution_table(current_distribution, i+1, num_frogs, name, i+1)
             print('\n')
 
         print('NET FLOW')
@@ -43,25 +46,25 @@ class Lake:
 
         self.write_evals(e_vals)
 
-    def save_distribution_table(self, d, num_jumps, num_frogs, name):
+    def save_distribution_table(self, d, num_jumps, num_frogs, name, idx):
         ''' Creates latex table of distribution '''
-        table_name = 'Your first table'
+        table_name = 'Table of Number of Frogs per Lilypad after Jump \\#{}'.format(idx)
         s1 = '\\begin{table}[h!] \n \\begin{center} \n '    
         s2 = '\\caption{0} \n'.format('{' + table_name + '}')
         
-        s3 = '\\label{tab:table1} \n \\begin{tabular}{l|l} % align left \n \\textbf{LilyPad #}' +\
-             ' & \\textbf{Number of Frogs}\\\ \n \hline'
+        s3 = '\\label{tab:table1} \n \\begin{tabular}{l|l} % align left \n \\textbf{LilyPad \\#}' +\
+             ' & \\textbf{Number of Frogs}\\\ \n \hline \n'
 
         table_rows = ''
         for key, value in sorted(d.items(), key=lambda x: int(x[0][3:])):
-            table_row = '{} & {}\n'.format(key, value)
+            table_row = '{} & {} \\\ \n'.format(key, value)
             table_rows += table_row
 
-        
-        s4 = '\\end{tabular} \n \\end{center} \n \\end{table}'
+        table_rows = table_rows[:-4] + '\n'
 
-        f = open('{name}/latex_tables.txt'.format(name), 'a+')
-        f.write('hello')
+        s4 = '\\end{tabular} \n \\end{center} \n \\end{table}'
+        
+        f = open('{}/latex_tables.txt'.format(name), 'a+')
         f.write(s1 + s2 + s3 + table_rows + s4)
         f.write('\n\n')
         f.close()
@@ -82,7 +85,7 @@ class Lake:
         distribution = self.dict_dist(self.pads_dict)
         self.pretty_print_dict(distribution)
         self.save_histogram_image(distribution, 0, num_frogs, name)
-        self.save_distribution_table(distribution, 0, num_frogs, name)
+        self.save_distribution_table(distribution, 0, num_frogs, name, 0)
         print('\n')
 
 
