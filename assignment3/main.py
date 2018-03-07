@@ -13,32 +13,52 @@ class Lake:
         self.pads_dict = self.initialize_pads_dict(num_pads, num_frogs)
         self.transition_matrix = self.initialize_transition_matrix(num_pads)
         self.write_path = name
-
-        # Print initial stage
-        print('Initial Stage:')
-        distribution = self.dict_dist(self.pads_dict)
-        self.pretty_print_dict(distribution)
-        self.save_histogram_image(distribution, 0, num_frogs, name)
-        print('\n')
+        
+        self.print_initial_stage(num_frogs, name) # Print initial stage of frogs/lilypads, pre-jumps
 
         if not os.path.exists(name):
             os.makedirs(name)
-            
+
+        net_flow = []
+        current_distribution = self.dict_dist(self.pads_dict)
         for i in range(num_iterations):
             print('After {} jumps:'.format(i+1))
+            prev_distribution = current_distribution
             self.increment_time()
-            distribution = self.dict_dist(self.pads_dict)
-            self.pretty_print_dict(distribution)
-            self.save_histogram_image(distribution, i+1, num_frogs, name)
+            current_distribution = self.dict_dist(self.pads_dict)
+            net_flow.append(self.get_net_flow(current_distribution, prev_distribution))
+            self.pretty_print_dict(current_distribution)
+            self.save_histogram_image(current_distribution, i+1, num_frogs, name)
             print('\n')
 
+        print('NET FLOW')
+        print(net_flow)
+        
         e_vals = sorted(self.get_evals(self.transition_matrix), reverse=True)
         print('\nEigenvalues!')    
         [print(e_val) for e_val in e_vals]
         print('\n')
 
         self.write_evals(e_vals)
+
+    def get_net_flow(self, current_distribution, prev_distribution):
+        ''' Get '''
+        pads_list = list(current_distribution.keys())
+        total_net_change = 0
+        for pad in pads_list:
+            pad_net_change = abs(current_distribution[pad] - prev_distribution[pad])
+            total_net_change += pad_net_change
+        return total_net_change / len(pads_list)
     
+        
+    def print_initial_stage(self, num_frogs, name):
+        # Print initial stage
+        print('Initial Stage:')
+        distribution = self.dict_dist(self.pads_dict)
+        self.pretty_print_dict(distribution)
+        self.save_histogram_image(distribution, 0, num_frogs, name)
+        print('\n')
+        
     def write_evals(self, e_vals):
         f = open('{}/evals.txt'.format(self.write_path), 'w')
         f.write('Sorted evals for A\n')
@@ -72,6 +92,7 @@ class Lake:
     def dict_dist(self, d):
         tuple_list = [(key, len(d[key])) for key in self.pads_dict]
         d = {}
+        # convert tuple list to dict
         for pad, num_frogs in tuple_list:
             d[pad] = num_frogs
         return d
@@ -103,6 +124,9 @@ class Lake:
         for i in range(num_pads):
             pads['pad{}'.format(i)] = []
 
+        if num_frogs == None: # for flux dict
+            return pads
+        
         for i in range(num_frogs):
             pads['pad0'].append(Frog(i))
         return pads
