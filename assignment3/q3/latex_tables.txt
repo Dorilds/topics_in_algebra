@@ -1,0 +1,420 @@
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#1} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 33 \\ 
+pad1 & 29 \\ 
+pad2 & 0 \\ 
+pad3 & 0 \\ 
+pad4 & 0 \\ 
+pad5 & 0 \\ 
+pad6 & 0 \\ 
+pad7 & 0 \\ 
+pad8 & 0 \\ 
+pad9 & 38 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#2} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 34 \\ 
+pad1 & 22 \\ 
+pad2 & 8 \\ 
+pad3 & 0 \\ 
+pad4 & 0 \\ 
+pad5 & 0 \\ 
+pad6 & 0 \\ 
+pad7 & 0 \\ 
+pad8 & 9 \\ 
+pad9 & 27 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#3} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 24 \\ 
+pad1 & 22 \\ 
+pad2 & 9 \\ 
+pad3 & 4 \\ 
+pad4 & 0 \\ 
+pad5 & 0 \\ 
+pad6 & 0 \\ 
+pad7 & 5 \\ 
+pad8 & 13 \\ 
+pad9 & 23 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#4} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 30 \\ 
+pad1 & 17 \\ 
+pad2 & 6 \\ 
+pad3 & 4 \\ 
+pad4 & 3 \\ 
+pad5 & 0 \\ 
+pad6 & 2 \\ 
+pad7 & 6 \\ 
+pad8 & 16 \\ 
+pad9 & 16 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#5} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 26 \\ 
+pad1 & 20 \\ 
+pad2 & 9 \\ 
+pad3 & 3 \\ 
+pad4 & 1 \\ 
+pad5 & 4 \\ 
+pad6 & 2 \\ 
+pad7 & 10 \\ 
+pad8 & 7 \\ 
+pad9 & 18 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#6} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 23 \\ 
+pad1 & 14 \\ 
+pad2 & 15 \\ 
+pad3 & 2 \\ 
+pad4 & 6 \\ 
+pad5 & 2 \\ 
+pad6 & 4 \\ 
+pad7 & 6 \\ 
+pad8 & 9 \\ 
+pad9 & 19 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#7} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 14 \\ 
+pad1 & 22 \\ 
+pad2 & 8 \\ 
+pad3 & 6 \\ 
+pad4 & 3 \\ 
+pad5 & 3 \\ 
+pad6 & 5 \\ 
+pad7 & 8 \\ 
+pad8 & 8 \\ 
+pad9 & 23 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#8} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 16 \\ 
+pad1 & 15 \\ 
+pad2 & 11 \\ 
+pad3 & 5 \\ 
+pad4 & 5 \\ 
+pad5 & 2 \\ 
+pad6 & 6 \\ 
+pad7 & 8 \\ 
+pad8 & 12 \\ 
+pad9 & 20 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#9} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 16 \\ 
+pad1 & 17 \\ 
+pad2 & 6 \\ 
+pad3 & 5 \\ 
+pad4 & 6 \\ 
+pad5 & 6 \\ 
+pad6 & 8 \\ 
+pad7 & 2 \\ 
+pad8 & 19 \\ 
+pad9 & 15 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#10} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 15 \\ 
+pad1 & 15 \\ 
+pad2 & 10 \\ 
+pad3 & 5 \\ 
+pad4 & 4 \\ 
+pad5 & 6 \\ 
+pad6 & 4 \\ 
+pad7 & 12 \\ 
+pad8 & 12 \\ 
+pad9 & 17 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#11} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 16 \\ 
+pad1 & 12 \\ 
+pad2 & 11 \\ 
+pad3 & 6 \\ 
+pad4 & 7 \\ 
+pad5 & 4 \\ 
+pad6 & 8 \\ 
+pad7 & 6 \\ 
+pad8 & 15 \\ 
+pad9 & 15 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#12} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 17 \\ 
+pad1 & 8 \\ 
+pad2 & 12 \\ 
+pad3 & 4 \\ 
+pad4 & 8 \\ 
+pad5 & 10 \\ 
+pad6 & 5 \\ 
+pad7 & 8 \\ 
+pad8 & 15 \\ 
+pad9 & 13 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#13} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 14 \\ 
+pad1 & 10 \\ 
+pad2 & 6 \\ 
+pad3 & 11 \\ 
+pad4 & 10 \\ 
+pad5 & 4 \\ 
+pad6 & 8 \\ 
+pad7 & 9 \\ 
+pad8 & 10 \\ 
+pad9 & 18 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#14} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 12 \\ 
+pad1 & 8 \\ 
+pad2 & 9 \\ 
+pad3 & 8 \\ 
+pad4 & 9 \\ 
+pad5 & 11 \\ 
+pad6 & 6 \\ 
+pad7 & 7 \\ 
+pad8 & 14 \\ 
+pad9 & 16 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#15} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 11 \\ 
+pad1 & 11 \\ 
+pad2 & 10 \\ 
+pad3 & 8 \\ 
+pad4 & 7 \\ 
+pad5 & 10 \\ 
+pad6 & 10 \\ 
+pad7 & 11 \\ 
+pad8 & 10 \\ 
+pad9 & 12 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#16} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 12 \\ 
+pad1 & 6 \\ 
+pad2 & 9 \\ 
+pad3 & 13 \\ 
+pad4 & 5 \\ 
+pad5 & 9 \\ 
+pad6 & 15 \\ 
+pad7 & 7 \\ 
+pad8 & 13 \\ 
+pad9 & 11 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#17} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 9 \\ 
+pad1 & 15 \\ 
+pad2 & 6 \\ 
+pad3 & 8 \\ 
+pad4 & 11 \\ 
+pad5 & 12 \\ 
+pad6 & 9 \\ 
+pad7 & 10 \\ 
+pad8 & 9 \\ 
+pad9 & 11 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#18} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 12 \\ 
+pad1 & 9 \\ 
+pad2 & 10 \\ 
+pad3 & 4 \\ 
+pad4 & 10 \\ 
+pad5 & 10 \\ 
+pad6 & 11 \\ 
+pad7 & 12 \\ 
+pad8 & 10 \\ 
+pad9 & 12 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#19} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 14 \\ 
+pad1 & 10 \\ 
+pad2 & 5 \\ 
+pad3 & 9 \\ 
+pad4 & 6 \\ 
+pad5 & 7 \\ 
+pad6 & 15 \\ 
+pad7 & 13 \\ 
+pad8 & 9 \\ 
+pad9 & 12 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
+\begin{table}[h!] 
+ \begin{center} 
+ \caption{Table of Number of Frogs per Lilypad after Jump \#20} 
+\label{tab:table1} 
+ \begin{tabular}{l|l} % align left 
+ \textbf{LilyPad \#} & \textbf{Number of Frogs}\\ 
+ \hline 
+pad0 & 19 \\ 
+pad1 & 8 \\ 
+pad2 & 4 \\ 
+pad3 & 9 \\ 
+pad4 & 5 \\ 
+pad5 & 12 \\ 
+pad6 & 8 \\ 
+pad7 & 13 \\ 
+pad8 & 13 \\ 
+pad9 & 9 
+\end{tabular} 
+ \end{center} 
+ \end{table}
+
