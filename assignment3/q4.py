@@ -24,9 +24,9 @@ def write_eval_dict(d):
         f.write('N:{} {}\n'.format(key, np.around(val, 3)))
         
 def plot_2nd_evals(d):
-    plt.title('2nd Highest Eval vs N')
+    plt.title('2nd Largest Eigenvalue vs N')
     plt.xlabel('N')
-    plt.ylabel('Eval Value')
+    plt.ylabel('2nd Largest Eigenvalue')
     plt.ylim((0,1))
     plt.bar(range(len(d)), d.values(), align='center')
     plt.xticks(range(len(d)), d.keys())
@@ -44,8 +44,7 @@ def main():
         A = initialize_transition_matrix(n)
         e_vals = sorted(get_evals(A), reverse=True)
         if len(e_vals) < 2:
-            print("MISSED ONE")
-            continue
+            continue # no 2nd largest e_val if there is only 1 eval
         second_max_eval = e_vals[1]
         print(second_max_eval)
         second_max_evals[n] = second_max_eval
