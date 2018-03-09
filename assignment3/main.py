@@ -29,7 +29,7 @@ class Lake:
             prev_distribution = current_distribution
             self.increment_time()
             current_distribution = self.dict_dist(self.pads_dict)
-            net_flow.append(self.get_net_flow(current_distribution, prev_distribution))
+            net_flow.append(self.get_net_flow(current_distribution, prev_distribution, i, num_frogs))
             self.pretty_print_dict(current_distribution)
             self.save_histogram_image(current_distribution, i+1, num_frogs, name)
             self.save_distribution_table(current_distribution, i+1, num_frogs, name, i+1)
@@ -69,14 +69,19 @@ class Lake:
         f.write('\n\n')
         f.close()
         
-    def get_net_flow(self, current_distribution, prev_distribution):
+    def get_net_flow(self, current_distribution, prev_distribution, i, num_pads):
         ''' Get '''
         pads_list = list(current_distribution.keys())
         total_net_change = 0
         for pad in pads_list:
             pad_net_change = abs(current_distribution[pad] - prev_distribution[pad])
             total_net_change += pad_net_change
-        return total_net_change / len(pads_list)
+
+
+        denom = [pad for pad,_ in current_distribution.items() if current_distribution[pad]!=0]
+        denom += [pad for pad,_ in prev_distribution.items() if prev_distribution[pad]!=0]
+        denom = len(denom)
+        return total_net_change / denom
     
         
     def print_initial_stage(self, num_frogs, name):
