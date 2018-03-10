@@ -20,13 +20,17 @@ class Lake:
         utils.clean_dir(wpath) # since we append to the bottom of the file instead of overwriting
 
         net_flow = []
-        current_distribution = self.get_pads_distribution_dict(self.pads_dict)
+        mse = []
+        current_distribution = self.get_pads_distribution_dict(self.pads_dict)        
         for i in range(num_iterations):
             print('After {} jumps:'.format(i+1))
             prev_distribution = current_distribution
             self.increment_time()
             current_distribution = self.get_pads_distribution_dict(self.pads_dict)
-            net_flow.append(self.get_net_flow(current_distribution, prev_distribution, i, num_pads, num_frogs))
+            net_flow.append(self.get_net_flow(current_distribution, prev_distribution,
+                                              i, num_pads, num_frogs))
+            mse.append(utils.mean_squared_error(current_distribution, prev_distribution,
+                                                num_pads, num_frogs))
             utils.pretty_print_dict(current_distribution)
             utils.save_histogram_image(current_distribution, i+1, num_frogs, wpath)
             utils.save_distribution_table(current_distribution, i+1, num_frogs, wpath, i+1)
@@ -34,6 +38,9 @@ class Lake:
 
         print('NET FLOW')
         print(net_flow)
+        print('\MEAN SQUARED ERROR')
+        print(mse)
+        
         utils.write_flow(net_flow, wpath)
         
         e_vals = sorted(utils.get_evals(self.transition_matrix), reverse=True)
@@ -42,7 +49,6 @@ class Lake:
         print('\n')
 
         utils.write_evals(e_vals, wpath)
-
 
     def print_initial_stage(self, num_frogs, wpath):
         # Print initial stage
@@ -67,11 +73,13 @@ class Lake:
         denom = len(denom)
         return total_net_change / denom'''
 
-        #return total_net_change / len(pads_list)
-        return utils.mean_squared_error(current_distribution, prev_distribution, num_pads, num_frogs)                
+        return total_net_change / len(pads_list)
+            
+        
+                    
                     
     def increment_time(self):
-        ''' Make all the frogs jump '''
+        ''' Make all the frogs jump and update self.pads_list '''
         updated_pads = self.initialize_pads_dict(len(self.pads_dict), 0)
         for pad, frogs_list in self.pads_dict.items():
             for frog in frogs_list:

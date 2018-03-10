@@ -83,3 +83,7 @@ def clean_dir(wpath):
 
     if os.path.exists(wpath + '/latex_tables.txt'):
         os.remove(wpath + '/latex_tables.txt')
+
+#def print_and_write_results(net_flow, mse, e_vals, wpath):
+
+    
