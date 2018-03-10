@@ -15,7 +15,7 @@ class Lake:
         self.transition_matrix = self.initialize_transition_matrix(num_pads)
         self.write_path = wpath
         
-        utils.print_initial_stage(num_frogs, wpath) # Print initial stage of frogs/lilypads, pre-jumps
+        self.print_initial_stage(num_frogs, wpath) # Print initial stage of frogs/lilypads, pre-jumps
 
         if not os.path.exists(wpath):
             os.makedirs(wapth)
@@ -24,12 +24,12 @@ class Lake:
             os.remove(wpath + '/latex_tables.txt')
 
         net_flow = []
-        current_distribution = utils.dict_dist(self.pads_dict)
+        current_distribution = self.dict_dist(self.pads_dict)
         for i in range(num_iterations):
             print('After {} jumps:'.format(i+1))
             prev_distribution = current_distribution
             self.increment_time()
-            current_distribution = utils.dict_dist(self.pads_dict)
+            current_distribution = self.dict_dist(self.pads_dict)
             net_flow.append(self.get_net_flow(current_distribution, prev_distribution, i, num_pads, num_frogs))
             utils.pretty_print_dict(current_distribution)
             utils.save_histogram_image(current_distribution, i+1, num_frogs, wpath)
@@ -38,14 +38,24 @@ class Lake:
 
         print('NET FLOW')
         print(net_flow)
-        utils.write_flow(net_flow)
+        utils.write_flow(net_flow, wpath)
         
         e_vals = sorted(utils.get_evals(self.transition_matrix), reverse=True)
         print('\nEigenvalues!')    
         [print(e_val) for e_val in e_vals]
         print('\n')
 
-        utils.write_evals(e_vals)
+        utils.write_evals(e_vals, wpath)
+
+
+    def print_initial_stage(self, num_frogs, wpath):
+        # Print initial stage
+        print('Initial Stage:')
+        distribution = self.dict_dist(self.pads_dict)
+        self.pretty_print_dict(distribution)
+        self.save_histogram_image(distribution, 0, num_frogs, wpath)
+        self.save_distribution_table(distribution, 0, num_frogs, wpath, 0)
+        print('\n')
         
     def get_net_flow(self, current_distribution, prev_distribution, i, num_pads, num_frogs):
         ''' Get '''
@@ -121,3 +131,12 @@ class Lake:
                 return 'pad{}'.format(i)
         pdb.set_trace()
         raise Exception('disaster')
+
+
+    def dict_dist(self, d):
+        tuple_list = [(key, len(d[key])) for key in self.pads_dict]
+        d = {}
+        # convert tuple list to dict
+        for pad, num_frogs in tuple_list:
+            d[pad] = num_frogs
+            return d
