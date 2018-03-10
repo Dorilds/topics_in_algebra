@@ -77,13 +77,10 @@ class Lake:
             for frog in frogs_list:
                 next_pad = self.get_next_pad(pad)
                 updated_pads[next_pad].append(frog)
-
-        # Update pads dictionary
-        for key, value in self.pads_dict.items():            
-            self.pads_dict[key] = updated_pads[key][:]
+        self.pads_dict = updated_pads
         
     def initialize_transition_matrix(self, num_pads):
-        ''' Initialize nxn transition matrix '''
+        ''' Initialize nxn transition matrix for Math 57 Problem 5.6.1 Exploration'''
         transition_matrix = np.zeros((num_pads, num_pads))
         for row_idx in range(num_pads):
             transition_matrix[row_idx][row_idx-1] = 1/3
@@ -97,7 +94,7 @@ class Lake:
         for i in range(num_pads):
             pads['pad{}'.format(i)] = []
 
-        if num_frogs == None: # for flux dict
+        if num_frogs == None: # option used to flux dict, where we want pads w/ no frogs
             return pads
         
         for i in range(num_frogs):
@@ -108,17 +105,18 @@ class Lake:
         ''' Given the name of the current pad (i.e. 'pad3'), uses transition matrix to return 
         next pad name (i.e. 'pad2' or 'pad3' or 'pad4')'''
         pad_num = int(pad_name[3:]) # convert padnam (i.e. 'pad123') to number (i.e 123)
-        
-        row = self.transition_matrix[pad_num]
-        probability_total = np.zeros_like(row)
 
-        # ith entry in probability_total holds sum(row[0,i]) (including i)
+        # row of transition matrix for current pad. probability_vector[newpad] -> P(jump to newpad)
+        probability_vector= self.transition_matrix[pad_num]
+        probability_total = np.zeros_like(probability_vector)
+
+        # ith entry in probability_total holds sum(probability_vector[0,i]) (including i)
         for i in range(len(probability_total)):
             if i == 0:
-                probability_total[i] = row[i]
+                probability_total[i] = probability_vector[i]
                 continue
             else:
-                probability_total[i] = row[i] + probability_total[i-1]
+                probability_total[i] = probability_vector[i] + probability_total[i-1]
 
         # Return jth index with prob(transition_matrix[j])
         rand_prob = random.random()
