@@ -2,12 +2,12 @@ import numpy as np
 import random
 import utils
 import pdb # todo remove
-import matplotlib.pyplot as plt
-import os
+
 
 class Frog:
     def __init__(self, frog_number):
         self.frog_number = frog_number
+
         
 class Lake:
     def __init__(self, num_pads, num_frogs, num_iterations, wpath):

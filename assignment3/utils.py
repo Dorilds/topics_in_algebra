@@ -1,5 +1,4 @@
 import numpy as np
-import random
 import pdb # todo remove
 import matplotlib.pyplot as plt
 import os
