@@ -36,20 +36,10 @@ class Lake:
             utils.save_distribution_table(current_distribution, i+1, num_frogs, wpath, i+1)
             print('\n')
 
-        print('NET FLOW')
-        print(net_flow)
-        print('\MEAN SQUARED ERROR')
-        print(mse)
-        
-        utils.write_flow(net_flow, wpath)
-        
         e_vals = sorted(utils.get_evals(self.transition_matrix), reverse=True)
-        print('\nEigenvalues!')    
-        [print(e_val) for e_val in e_vals]
-        print('\n')
-
-        utils.write_evals(e_vals, wpath)
-
+        utils.print_and_write_results(net_flow, mse, e_vals, wpath)
+        # todo write mse to file
+        
     def print_initial_stage(self, num_frogs, wpath):
         # Print initial stage
         print('Initial Stage:')
