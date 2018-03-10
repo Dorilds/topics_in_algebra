@@ -9,18 +9,18 @@ class Frog:
         self.frog_number = frog_number
         
 class Lake:
-    def __init__(self, num_pads, num_frogs, num_iterations, name):
+    def __init__(self, num_pads, num_frogs, num_iterations, wpath):
         self.pads_dict = self.initialize_pads_dict(num_pads, num_frogs)
         self.transition_matrix = self.initialize_transition_matrix(num_pads)
-        self.write_path = name
+        self.write_path = wpath
         
-        self.print_initial_stage(num_frogs, name) # Print initial stage of frogs/lilypads, pre-jumps
+        self.print_initial_stage(num_frogs, wpath) # Print initial stage of frogs/lilypads, pre-jumps
 
-        if not os.path.exists(name):
-            os.makedirs(name)
+        if not os.path.exists(wpath):
+            os.makedirs(wapth)
             
-        if os.path.exists(name + '/latex_tables.txt'):
-            os.remove(name + '/latex_tables.txt')
+        if os.path.exists(wpath + '/latex_tables.txt'):
+            os.remove(wpath + '/latex_tables.txt')
 
         net_flow = []
         current_distribution = self.dict_dist(self.pads_dict)
@@ -29,10 +29,10 @@ class Lake:
             prev_distribution = current_distribution
             self.increment_time()
             current_distribution = self.dict_dist(self.pads_dict)
-            net_flow.append(self.get_net_flow(current_distribution, prev_distribution, i, num_frogs))
+            net_flow.append(self.get_net_flow(current_distribution, prev_distribution, i, num_pads, num_frogs))
             self.pretty_print_dict(current_distribution)
-            self.save_histogram_image(current_distribution, i+1, num_frogs, name)
-            self.save_distribution_table(current_distribution, i+1, num_frogs, name, i+1)
+            self.save_histogram_image(current_distribution, i+1, num_frogs, wpath)
+            self.save_distribution_table(current_distribution, i+1, num_frogs, wpath, i+1)
             print('\n')
 
         print('NET FLOW')
@@ -46,7 +46,7 @@ class Lake:
 
         self.write_evals(e_vals)
 
-    def save_distribution_table(self, d, num_jumps, num_frogs, name, idx):
+    def save_distribution_table(self, d, num_jumps, num_frogs, wpath, idx):
         ''' Creates latex table of distribution '''
         table_name = 'Table of Number of Frogs per Lilypad after Jump \\#{}'.format(idx)
         s1 = '\\begin{table}[h!] \n \\begin{center} \n '    
@@ -64,33 +64,45 @@ class Lake:
 
         s4 = '\\end{tabular} \n \\end{center} \n \\end{table}'
         
-        f = open('{}/latex_tables.txt'.format(name), 'a+')
+        f = open('{}/latex_tables.txt'.format(wpath), 'a+')
         f.write(s1 + s2 + s3 + table_rows + s4)
         f.write('\n\n')
         f.close()
         
-    def get_net_flow(self, current_distribution, prev_distribution, i, num_pads):
+    def get_net_flow(self, current_distribution, prev_distribution, i, num_pads, num_frogs):
         ''' Get '''
         pads_list = list(current_distribution.keys())
         total_net_change = 0
         for pad in pads_list:
             pad_net_change = abs(current_distribution[pad] - prev_distribution[pad])
             total_net_change += pad_net_change
-
-
+            
+        '''
         denom = [pad for pad,_ in current_distribution.items() if current_distribution[pad]!=0]
         denom += [pad for pad,_ in prev_distribution.items() if prev_distribution[pad]!=0]
         denom = len(denom)
-        return total_net_change / denom
-    
+        return total_net_change / denom'''
+
+        #return total_net_change / len(pads_list)
+        return self.mean_squared_error(current_distribution, prev_distribution, num_pads, num_frogs)
+
+    def mean_squared_error(self, current_distribution, prev_distribution, num_pads, num_frogs):
+        pads_list = list(current_distribution.keys())
+        total_error = 0
+        equilibrium_target = num_frogs / num_pads
+        for pad in pads_list:
+            pad_net_change = abs((current_distribution[pad] - equilibrium_target)**2)
+            total_error += pad_net_change
+        return total_error
         
-    def print_initial_stage(self, num_frogs, name):
+        
+    def print_initial_stage(self, num_frogs, wpath):
         # Print initial stage
         print('Initial Stage:')
         distribution = self.dict_dist(self.pads_dict)
         self.pretty_print_dict(distribution)
-        self.save_histogram_image(distribution, 0, num_frogs, name)
-        self.save_distribution_table(distribution, 0, num_frogs, name, 0)
+        self.save_histogram_image(distribution, 0, num_frogs, wpath)
+        self.save_distribution_table(distribution, 0, num_frogs, wpath, 0)
         print('\n')
 
 
@@ -116,9 +128,7 @@ class Lake:
         e_vals, _ = np.linalg.eig(A)
         return e_vals
     
-    def save_histogram_image(self, d, num_jumps, num_frogs, name):
-        # make histogram
-        # save to name/{name}
+    def save_histogram_image(self, d, num_jumps, num_frogs, wpath):
 
         plt.title("Frog Distribution After {} jumps".format(num_jumps))
         plt.xlabel('Lilypads')
@@ -128,7 +138,7 @@ class Lake:
 
         plt.bar(range(len(d)), d.values(), align='center')
         plt.xticks(range(len(d)), d.keys())
-        plt.savefig('{}/{}.png'.format(name, num_jumps), bbox_inches='tight')
+        plt.savefig('{}/{}.png'.format(wpath, num_jumps), bbox_inches='tight')
         plt.gcf().clear()
         
     def pretty_print_dict(self, d):
