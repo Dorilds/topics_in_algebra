@@ -41,7 +41,7 @@ class Lake:
         # todo write mse to file
         
     def print_initial_stage(self, num_frogs, wpath):
-        # Print initial stage
+        ''' Prints initial stage and writes to file '''
         print('Initial Stage:')
         distribution = self.get_pads_distribution_dict(self.pads_dict)
         utils.pretty_print_dict(distribution)
@@ -50,7 +50,7 @@ class Lake:
         print('\n')
         
     def get_net_flow(self, current_distribution, prev_distribution, i, num_pads, num_frogs):
-        ''' Get '''
+        ''' Calculates sum ( change in #frogs/lilypad for all lilypads) '''
         pads_list = list(current_distribution.keys())
         total_net_change = 0
         for pad in pads_list:
@@ -58,16 +58,15 @@ class Lake:
             total_net_change += pad_net_change
             
         '''
+        # More dynamic denominator. Results in identical graphs across N-size. 
+        # We can think of this as a line of infinite lilypads, with frogs jumping left/right
         denom = [pad for pad,_ in current_distribution.items() if current_distribution[pad]!=0]
         denom += [pad for pad,_ in prev_distribution.items() if prev_distribution[pad]!=0]
         denom = len(denom)
         return total_net_change / denom'''
 
         return total_net_change / len(pads_list)
-            
-        
-                    
-                    
+                                                            
     def increment_time(self):
         ''' Make all the frogs jump and update self.pads_list '''
         updated_pads = self.initialize_pads_dict(len(self.pads_dict), 0)
