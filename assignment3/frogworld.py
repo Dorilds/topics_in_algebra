@@ -14,9 +14,10 @@ class Lake:
         self.pads_dict = self.initialize_pads_dict(num_pads, num_frogs)
         self.transition_matrix = self.initialize_transition_matrix(num_pads)
         self.write_path = wpath
-        
-        self.print_initial_stage(num_frogs, wpath) # Print initial stage of frogs/lilypads, pre-jumps
 
+        pdb.set_trace()
+        self.print_initial_stage(num_frogs, wpath) # Print initial stage of frogs/lilypads, pre-jumps
+    
         if not os.path.exists(wpath):
             os.makedirs(wapth)
             
@@ -52,9 +53,9 @@ class Lake:
         # Print initial stage
         print('Initial Stage:')
         distribution = self.dict_dist(self.pads_dict)
-        self.pretty_print_dict(distribution)
-        self.save_histogram_image(distribution, 0, num_frogs, wpath)
-        self.save_distribution_table(distribution, 0, num_frogs, wpath, 0)
+        utils.pretty_print_dict(distribution)
+        utils.save_histogram_image(distribution, 0, num_frogs, wpath)
+        utils.save_distribution_table(distribution, 0, num_frogs, wpath, 0)
         print('\n')
         
     def get_net_flow(self, current_distribution, prev_distribution, i, num_pads, num_frogs):
@@ -79,7 +80,7 @@ class Lake:
         updated_pads = self.initialize_pads_dict(len(self.pads_dict), 0)
         for pad, frogs_list in self.pads_dict.items():
             for frog in frogs_list:
-                next_pad = self.get_ext_pad(pad)
+                next_pad = self.get_next_pad(pad)
                 updated_pads[next_pad].append(frog)
 
         # Update pads dictionary
@@ -139,4 +140,4 @@ class Lake:
         # convert tuple list to dict
         for pad, num_frogs in tuple_list:
             d[pad] = num_frogs
-            return d
+        return d
