@@ -15,22 +15,17 @@ class Lake:
         self.transition_matrix = self.initialize_transition_matrix(num_pads)
         self.write_path = wpath
 
-        pdb.set_trace()
-        self.print_initial_stage(num_frogs, wpath) # Print initial stage of frogs/lilypads, pre-jumps
-    
-        if not os.path.exists(wpath):
-            os.makedirs(wapth)
-            
-        if os.path.exists(wpath + '/latex_tables.txt'):
-            os.remove(wpath + '/latex_tables.txt')
+        self.print_initial_stage(num_frogs, wpath) # Print initial stage of frogs/lilypads, pre-jumpsn
+        # makes wpath folder if not existing. deletes latex_tables.txt if existing
+        utils.clean_dir(wpath) # since we append to the bottom of the file instead of overwriting
 
         net_flow = []
-        current_distribution = self.dict_dist(self.pads_dict)
+        current_distribution = self.get_pads_distribution_dict(self.pads_dict)
         for i in range(num_iterations):
             print('After {} jumps:'.format(i+1))
             prev_distribution = current_distribution
             self.increment_time()
-            current_distribution = self.dict_dist(self.pads_dict)
+            current_distribution = self.get_pads_distribution_dict(self.pads_dict)
             net_flow.append(self.get_net_flow(current_distribution, prev_distribution, i, num_pads, num_frogs))
             utils.pretty_print_dict(current_distribution)
             utils.save_histogram_image(current_distribution, i+1, num_frogs, wpath)
@@ -52,7 +47,7 @@ class Lake:
     def print_initial_stage(self, num_frogs, wpath):
         # Print initial stage
         print('Initial Stage:')
-        distribution = self.dict_dist(self.pads_dict)
+        distribution = self.get_pads_distribution_dict(self.pads_dict)
         utils.pretty_print_dict(distribution)
         utils.save_histogram_image(distribution, 0, num_frogs, wpath)
         utils.save_distribution_table(distribution, 0, num_frogs, wpath, 0)
@@ -133,11 +128,10 @@ class Lake:
         pdb.set_trace()
         raise Exception('disaster')
 
-
-    def dict_dist(self, d):
+    def get_pads_distribution_dict(self, d):
+        ''' Given pads dict, returns dictionariy mapping [padname] -> # frogs on pad '''
         tuple_list = [(key, len(d[key])) for key in self.pads_dict]
         d = {}
-        # convert tuple list to dict
         for pad, num_frogs in tuple_list:
             d[pad] = num_frogs
         return d

@@ -74,5 +74,12 @@ def save_histogram_image(d, num_jumps, num_frogs, wpath):
     plt.gcf().clear()
         
 def pretty_print_dict(d):
-    for key, value in sorted(d.items(), key=lambda x: int(x[0][3:])):
+    for key, value in sortedd.items(), key=lambda x: int(x[0][3:])):
         print("{} : {}".format(key, value))
+
+def clean_dir(wpath):
+    if not os.path.exists(wpath):
+        os.makedirs(wpath)
+
+    if os.path.exists(wpath + '/latex_tables.txt'):
+        os.remove(wpath + '/latex_tables.txt')
