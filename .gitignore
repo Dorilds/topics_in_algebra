@@ -1,3 +1,4 @@
 .DS_Store
 .ipynb_checkpoints/
 grading.py
+assignment3/__pycache__/
