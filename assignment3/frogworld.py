@@ -24,15 +24,15 @@ class Lake:
             os.remove(wpath + '/latex_tables.txt')
 
         net_flow = []
-        current_distribution = self.dict_dist(self.pads_dict)
+        current_distribution = utils.dict_dist(self.pads_dict)
         for i in range(num_iterations):
             print('After {} jumps:'.format(i+1))
             prev_distribution = current_distribution
             self.increment_time()
-            current_distribution = self.dict_dist(self.pads_dict)
+            current_distribution = utils.dict_dist(self.pads_dict)
             net_flow.append(self.get_net_flow(current_distribution, prev_distribution, i, num_pads, num_frogs))
-            self.pretty_print_dict(current_distribution)
-            self.save_histogram_image(current_distribution, i+1, num_frogs, wpath)
+            utils.pretty_print_dict(current_distribution)
+            utils.save_histogram_image(current_distribution, i+1, num_frogs, wpath)
             utils.save_distribution_table(current_distribution, i+1, num_frogs, wpath, i+1)
             print('\n')
 
@@ -40,7 +40,7 @@ class Lake:
         print(net_flow)
         utils.write_flow(net_flow)
         
-        e_vals = sorted(self.get_evals(self.transition_matrix), reverse=True)
+        e_vals = sorted(utils.get_evals(self.transition_matrix), reverse=True)
         print('\nEigenvalues!')    
         [print(e_val) for e_val in e_vals]
         print('\n')
@@ -63,37 +63,7 @@ class Lake:
 
         #return total_net_change / len(pads_list)
         return utils.mean_squared_error(current_distribution, prev_distribution, num_pads, num_frogs)                
-
-        
-    def get_evals(self, A):
-        e_vals, _ = np.linalg.eig(A)
-        return e_vals
-    
-    def save_histogram_image(self, d, num_jumps, num_frogs, wpath):
-
-        plt.title("Frog Distribution After {} jumps".format(num_jumps))
-        plt.xlabel('Lilypads')
-        plt.ylabel('Number of Frogs')
-        plt.ylim((0, num_frogs))
-        # plt.bar(d.keys(), d.values(), color='b')
-
-        plt.bar(range(len(d)), d.values(), align='center')
-        plt.xticks(range(len(d)), d.keys())
-        plt.savefig('{}/{}.png'.format(wpath, num_jumps), bbox_inches='tight')
-        plt.gcf().clear()
-        
-    def pretty_print_dict(self, d):
-        for key, value in sorted(d.items(), key=lambda x: int(x[0][3:])):
-            print("{} : {}".format(key, value))
-            
-    def dict_dist(self, d):
-        tuple_list = [(key, len(d[key])) for key in self.pads_dict]
-        d = {}
-        # convert tuple list to dict
-        for pad, num_frogs in tuple_list:
-            d[pad] = num_frogs
-        return d
-        
+                    
     def increment_time(self):
         ''' Make all the frogs jump '''
         updated_pads = self.initialize_pads_dict(len(self.pads_dict), 0)
